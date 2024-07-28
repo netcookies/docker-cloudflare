@@ -14,5 +14,7 @@ export const schema = Type.Object(
 
 export const parser: IpEchoFunction<typeof schema> = async (echo, opts) => {
   const { trim } = opts;
-  return trim ? echo.trim() : echo;
+  let echoTrimed = trim ? echo.trim() : echo;
+  let echoIp = echoTrimed.match(/(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))/);
+  return echoIp[0];
 };
